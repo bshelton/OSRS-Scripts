@@ -3,7 +3,6 @@ package gdkiller;
 import gdkiller.Tasks.*;
 
 import org.powerbot.script.*;
-import org.powerbot.script.rt4.Constants;
 import org.powerbot.script.rt4.ClientContext;
 
 
