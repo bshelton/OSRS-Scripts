@@ -1,6 +1,7 @@
 package LavaCrafter.lavaruneCrafter.Tasks;
 
 import LavaCrafter.lavaruneCrafter.utils.Items;
+import LavaCrafter.lavaruneCrafter.utils.SelfService;
 import org.powerbot.script.rt4.Bank;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Equipment.Slot;
@@ -25,8 +26,7 @@ public class Banking extends Task {
 
     @Override
     public boolean activate() {
-        return CASTLE_WARS_AREA.getCentralTile().distanceTo(players.local()) < 15 &&
-                !players.ctx.inventory.select().id(Items.LAVA_RUNE_ID).isEmpty();
+        return CASTLE_WARS_AREA.getCentralTile().distanceTo(players.local()) < 15;
     }
 
     @Override
@@ -75,9 +75,7 @@ public class Banking extends Task {
                 if (bank.withdraw(EARTH_TALISMAN_ID, Bank.Amount.ONE) && bank.withdraw(EARTH_RUNE_ID, Bank.Amount.ALL) ) {
                     bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
                 }
-                else {
-                    System.out.println("No items to withdraw");
-                }
+
             }
 
         } else {

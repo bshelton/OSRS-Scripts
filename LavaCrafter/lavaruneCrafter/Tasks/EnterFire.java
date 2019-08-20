@@ -1,6 +1,7 @@
 package LavaCrafter.lavaruneCrafter.Tasks;
 import LavaCrafter.lavaruneCrafter.utils.Items;
 import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.Game;
 import org.powerbot.script.rt4.GameObject;
 
 import static ess.utils.Areas.OUTSIDE_RUINS;
@@ -12,6 +13,7 @@ public class EnterFire extends Task {
     }
 
     public boolean activate() {
+        players.ctx.game.tab(Game.Tab.INVENTORY);
         return !players.ctx.inventory.select().id(Items.PURE_ESS_ID).isEmpty() && OUTSIDE_RUINS.getCentralTile().distanceTo(players.local()) < 20;
     }
 
