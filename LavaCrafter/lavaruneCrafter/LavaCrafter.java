@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 @Script.Manifest(
         name = "Lava Rune Crafter",
-        description = "Script that makes Lava runes.",
-        properties = "client = 4, topic=1352630"
+        description = "Script that makes Lava runes using ring of dueling to teleport.",
+        properties = "client=4,topic=1352630;"
 )
 
 public class LavaCrafter extends PollingScript<ClientContext>{
