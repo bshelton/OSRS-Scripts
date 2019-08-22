@@ -34,13 +34,13 @@ public class GreenDragonKiller extends PollingScript<ClientContext> implements P
     public void start() {
         System.out.println("Green Dragon Killer Started!");
 
-        //taskList.add(new Banking(ctx));
-        //taskList.add(new TeleportToCorpBeast(ctx));
-        //taskList.add(new ExitCorpCave(ctx));
-        //taskList.add(new WalkToDrags(ctx));
-        //taskList.add(new AttackDrags(ctx));
-        //taskList.add(new Loot(ctx));
-        taskList.add(new LeaveDrags(ctx));
+        taskList.add(new Banking(ctx));
+        taskList.add(new TeleportToCorpBeast(ctx));
+        taskList.add(new ExitCorpCave(ctx));
+        taskList.add(new WalkToDrags(ctx));
+        taskList.add(new AttackDrags(ctx));
+        taskList.add(new Loot(ctx));
+        //taskList.add(new LeaveDrags(ctx));
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -58,11 +58,13 @@ public class GreenDragonKiller extends PollingScript<ClientContext> implements P
         if (!haveRunStart){
             //Set anything I want at the beginning
 
-       }
+       } else {
 
-        for (Task task : taskList) {
-            if (task.activate())
-                task.execute();
+            for (Task task : taskList) {
+                if (task.activate())
+                    task.execute();
+            }
+
         }
     }
 

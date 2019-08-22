@@ -4,6 +4,7 @@ import gdkiller.GreenDragonKiller;
 import gdkiller.utils.Areas;
 import gdkiller.GreenDragonKiller.*;
 
+import gdkiller.utils.SelfService;
 import org.powerbot.script.Filter;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Item;
@@ -29,16 +30,24 @@ public class AttackDrags extends Task{
 
         return  Areas.GREEN_DRAGS_LVL24.getCentralTile().distanceTo(players.local()) < 75
                 && canAttackDrag()
-                && hasFoodInInventory();
+                && hasFoodInInventory()
+                && players.local().healthPercent() > .6;
     }
 
     @Override
     public void execute(){
+        ItemQuery<Item> foodQuery = players.ctx.inventory.select().id(SelfService.getFoodIDFromInventory(players.ctx));
+        Item foodToEat = foodQuery.poll();
+        System.out.println(foodToEat.name());
+
+        if (players.local().healthPercent() < .6){
+            System.out.println("eating");
+            foodToEat.interact("Eat");
+        }
 
         if (getDrag().animation() != 92 ) {// not dying
             getDrag().interact("Attack");
         }
-
 
         Condition.wait(new Callable<Boolean>() {
             @Override

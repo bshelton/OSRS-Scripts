@@ -5,6 +5,8 @@ import org.powerbot.script.rt4.ClientContext;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class DragonKillerForm extends JFrame{
     private JCheckBox supersCheckbox;
@@ -46,18 +48,34 @@ public class DragonKillerForm extends JFrame{
                     GreenDragonKiller.haveRunStart = true;
                     setVisible(false);
                 }
-                if (foodBox.getSelectedItem().equals("None")){
+
+                System.out.println(GreenDragonKiller.foodSelection);
+                if (GreenDragonKiller.foodSelection.equals("None")){
                     JOptionPane.showMessageDialog(null, "You must select a food item.", "", JOptionPane.WARNING_MESSAGE);
+                } else{
+                    GreenDragonKiller.haveRunStart = true;
                 }
 
-                GreenDragonKiller.foodSelection = foodBox.getSelectedItem().toString();
 
 
             }
         });
+
+
+
     }
 
     private void createUIComponents() {
         foodBox = new JComboBox(GreenDragonKiller.foodChoices);
+
+        foodBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+                    GreenDragonKiller.foodSelection = e.getItem().toString();
+                    System.out.println(GreenDragonKiller.foodSelection);
+                }
+            }
+        });
     }
 }

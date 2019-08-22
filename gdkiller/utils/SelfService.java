@@ -7,11 +7,8 @@ import java.util.regex.Pattern;
 
 public class SelfService extends ClientContext {
 
-    private String gamesRegex = ".*Games.*";
-    private Pattern gamesPattern = Pattern.compile(gamesRegex);
-
-    private static String foodRegex = ".*"+ GreenDragonKiller.foodSelection+".*";
-    private static Pattern foodPattern = Pattern.compile(foodRegex);
+    private static String gamesRegex = ".*Games.*";
+    private static Pattern gamesPattern = Pattern.compile(gamesRegex);
 
 
     public SelfService(ClientContext ctx){
@@ -19,6 +16,8 @@ public class SelfService extends ClientContext {
     }
 
     public static int getFoodIDFromInventory(ClientContext ctx){
+        String foodRegex = ".*"+ GreenDragonKiller.foodSelection+".*";
+        Pattern foodPattern = Pattern.compile(foodRegex);
         ItemQuery<Item> foodQueryInventory = ctx.inventory.select().name(foodPattern);
 
         if (!foodQueryInventory.isEmpty()){
@@ -29,6 +28,8 @@ public class SelfService extends ClientContext {
     }
 
     public static int getFoodIDFromBank(ClientContext ctx){
+        String foodRegex = ".*"+ GreenDragonKiller.foodSelection+".*";
+        Pattern foodPattern = Pattern.compile(foodRegex);
         ItemQuery<Item> foodQueryBank = ctx.bank.select().name(foodPattern);
 
         if (!foodQueryBank.isEmpty()){
@@ -87,14 +88,13 @@ public class SelfService extends ClientContext {
         return false;
     }
 
-    public boolean haveGamesNecklace(){
-        players.ctx.game.tab(Game.Tab.INVENTORY);
-        ItemQuery<Item> gamesQuery = players.ctx.inventory.select().name(gamesPattern);
+    public static boolean haveGamesNecklaceinInventory(ClientContext ctx){
+        ctx.game.tab(Game.Tab.INVENTORY);
+        ItemQuery<Item> gamesQuery = ctx.inventory.select().name(gamesPattern);
 
-        if (gamesQuery.isEmpty()){
-            System.out.println("No games necklace found");
+        if (!gamesQuery.isEmpty()){
+            return true;
         }
-
-        return gamesQuery.poll().valid();
+        return false;
     }
 }

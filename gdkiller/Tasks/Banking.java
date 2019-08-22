@@ -35,32 +35,14 @@ public class Banking extends Task{
 
     @Override
     public boolean activate(){
-        return  Areas.EDGEVILLE.getCentralTile().distanceTo(players.local()) < 15
-                && players.local().animation() == -1
-                && players.ctx.inventory.items().length < 20;
+        return  Areas.EDGEVILLE.getCentralTile().distanceTo(players.local()) < 7
+                && SelfService.idling(players.ctx)
+                && !players.ctx.chat.chatting()
+                && !bank.opened();
     }
 
     @Override
     public void execute(){
-
-        if (!haveGamesNecklaceinBank()) {
-            players.ctx.controller.stop(); //Need Games Necklace to get to dragons.
-        }
-
-        if (haveGloryinBank()){
-            if (!bank.inViewport()){
-                camera.turnTo(bank.nearest());
-            }
-
-            if (!bank.opened()) {
-                bank.open();
-                bank.depositInventory();
-
-                withdrawGlory();
-                wearGlory();
-                bank.close();
-            }
-        }
 
         if (!bank.inViewport()){
             camera.turnTo(bank.nearest());
@@ -70,21 +52,32 @@ public class Banking extends Task{
             bank.open();
             bank.depositInventory();
 
-            if (GreenDragonKiller.usesuperPotion && haveSupersInBank() && !supersInInventory()){
+            withdrawGames();
+
+//            if (haveGamesNecklaceinBank() && SelfService.haveGamesNecklaceinInventory(players.ctx)) {
+//                withdrawGames();
+//            }
+
+            withdrawGlory();
+
+            if (GreenDragonKiller.usesuperPotion && haveSupersInBank() && !supersInInventory()) {
                 withdrawSupers();
             }
 
-            if (GreenDragonKiller.usePrayerPotions && havePrayersInBank() && !prayersInInventory()){
+            if (GreenDragonKiller.usePrayerPotions && havePrayersInBank() && !prayersInInventory()) {
                 withdrawPrayers();
             }
 
-            if (GreenDragonKiller.useLootBag && lootBagInBank() && !lootBagInInventory()){
+            if (GreenDragonKiller.useLootBag && lootBagInBank() && !lootBagInInventory()) {
                 bank.withdraw(Items.LOOT_BAG, Bank.Amount.ONE);
             }
 
-            bank.withdraw(SelfService.getFoodIDFromBank(players.ctx), 22);
-
+            if (!GreenDragonKiller.foodSelection.equals("None")) {
+                bank.withdraw(SelfService.getFoodIDFromBank(players.ctx), 22);
+                //bank.withdraw(SelfService.getFoodIDFromBank(players.ctx), Bank.Amount.FIVE);
+            }
             bank.close();
+
         }
 
     }
@@ -122,6 +115,12 @@ public class Banking extends Task{
         return bank.withdraw(prayersQuery.poll(), 1);
     }
 
+    private boolean withdrawGames(){
+        ItemQuery<Item> gamesQuery = players.ctx.bank.select().name(gamesPattern);
+        return bank.withdraw(gamesQuery.poll(), 1);
+
+    }
+
     private boolean haveGamesNecklaceinBank(){
         if(!bank.inViewport()){
             camera.turnTo(bank.nearest());
@@ -133,11 +132,11 @@ public class Banking extends Task{
 
         ItemQuery<Item> gamesQuery = players.ctx.bank.select().name(gamesPattern);
 
-        if (bank.opened()){
-            bank.close();
+        if (!gamesQuery.isEmpty()){
+            return true;
         }
 
-        return gamesQuery.isEmpty();
+        return false;
     }
 
     private boolean haveSupersInBank(){
@@ -175,7 +174,7 @@ public class Banking extends Task{
             bank.close();
         }
 
-        return gloryQuery.isEmpty();
+        return !gloryQuery.isEmpty();
 
     }
 

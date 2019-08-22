@@ -2,9 +2,11 @@ package gdkiller.Tasks;
 
 import gdkiller.utils.Areas;
 import gdkiller.utils.SelfService;
+import org.powerbot.script.Condition;
 import org.powerbot.script.Filter;
 import org.powerbot.script.rt4.*;
 
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 public class TeleportToCorpBeast extends Task {
@@ -18,9 +20,10 @@ public class TeleportToCorpBeast extends Task {
 
     @Override
     public boolean activate() {
-        return Areas.EDGEVILLE.getCentralTile().distanceTo(players.local()) < 25
-                //&& wearingArmour()
-                &&helper.haveGamesNecklace();
+        return Areas.EDGEVILLE_BANK.getCentralTile().distanceTo(players.local()) < 5
+                && wearingArmour()
+                && SelfService.haveGamesNecklaceinInventory(players.ctx)
+                && SelfService.haveFoodInInventory(players.ctx);
     }
 
     @Override
@@ -36,9 +39,18 @@ public class TeleportToCorpBeast extends Task {
             necklace.interact("Rub");
         }
 
-        ChatOption c = players.ctx.chat.select().text("Corporeal Beast.").poll();
+
         if (players.ctx.chat.chatting() && players.local().animation() == -1){
-            c.select(true);
+            System.out.println("Should select corp beast from chat.");
+
+            Condition.wait(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    ChatOption c = players.ctx.chat.select().text("Corporeal Beast.").poll();
+                    return c.select(true);
+                }
+            }, 250, 12);
+
         }
     }
 
@@ -49,8 +61,6 @@ public class TeleportToCorpBeast extends Task {
                 && players.ctx.equipment.itemAt(Equipment.Slot.OFF_HAND).name().equals("Anti-dragon shield")
                 && players.ctx.equipment.itemAt(Equipment.Slot.MAIN_HAND).id() > 0){
 
-            System.out.println("Wearing torso and has a shield");
-            System.out.println("Wielding something to attack with");
             return true;
 
         }
