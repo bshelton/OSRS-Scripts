@@ -1,11 +1,9 @@
 package gdkiller.Tasks;
 
+import gdkiller.utils.Items;
 import gdkiller.utils.SelfService;
 import org.powerbot.script.Condition;
-import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.GroundItem;
-import org.powerbot.script.rt4.Item;
-import org.powerbot.script.rt4.ItemQuery;
+import org.powerbot.script.rt4.*;
 
 import java.util.Random;
 
@@ -24,7 +22,8 @@ public class Loot extends Task{
     @Override
     public void execute(){
 
-        GroundItem itemToPickup = ctx.groundItems.select().id(PICKUP_ITEMS).nearest().poll();
+        BasicQuery<GroundItem> groundItems = ctx.groundItems.select().id(Items.PICKUP_ITEMS);
+        GroundItem itemToPickup = groundItems.nearest().poll();
 
         if (SelfService.haveFoodInInventory(ctx)){
             if (ctx.combat.healthPercent() < 60){
@@ -46,7 +45,12 @@ public class Loot extends Task{
     }
 
     private boolean itemsOnGround(){
-        GroundItem itemToPickup = ctx.groundItems.select().id(PICKUP_ITEMS).nearest().poll();
-        return itemToPickup.valid() && itemToPickup.inViewport();
+        BasicQuery<GroundItem> groundItems = ctx.groundItems.select().id(Items.PICKUP_ITEMS);
+
+        if (groundItems.isEmpty()){
+            return false;
+        } else return true;
     }
+
+
 }
