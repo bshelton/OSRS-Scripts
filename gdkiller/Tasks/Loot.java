@@ -22,8 +22,7 @@ public class Loot extends Task{
     @Override
     public void execute(){
 
-        BasicQuery<GroundItem> groundItems = ctx.groundItems.select().id(Items.PICKUP_ITEMS);
-        GroundItem itemToPickup = groundItems.nearest().poll();
+        GroundItem itemToPickup = ctx.groundItems.select(5).id(Items.PICKUP_ITEMS).nearest().poll();
 
         if (SelfService.haveFoodInInventory(ctx)){
             if (ctx.combat.healthPercent() < 60){
@@ -33,15 +32,14 @@ public class Loot extends Task{
             if (ctx.inventory.isFull() && SelfService.haveFoodInInventory(ctx)){
                 //Need to clear up inventory
                 SelfService.getFood(ctx).interact("Eat");
-
                 Condition.sleep(new Random().nextInt(1500));
-
-                itemToPickup.interact("Take");
+                //itemToPickup.interact("Take");
+                itemToPickup.interact( "Take");
             } else{
-                itemToPickup.interact("Take");
+                itemToPickup.interact( "Take");
+
             }
         }
-
     }
 
     private boolean itemsOnGround(){
