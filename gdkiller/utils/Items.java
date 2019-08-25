@@ -27,4 +27,7 @@ public class Items {
 
     public static final int DITCH = 23271;
 
+    public static final int[] PICKUP_ITEMS = {536, 1753};
+    public final static int[] DRAGON_IDS = {260, 261, 262, 263, 264};
+
 }

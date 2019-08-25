@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class TeleportToCorpBeast extends Task {
 
 
-    SelfService helper = new SelfService(players.ctx);
+    SelfService helper = new SelfService(ctx);
     private String gamesRegex = ".*Games.*";
     private Pattern gamesPattern = Pattern.compile(gamesRegex);
 
@@ -20,33 +20,36 @@ public class TeleportToCorpBeast extends Task {
 
     @Override
     public boolean activate() {
-        return Areas.EDGEVILLE_BANK.getCentralTile().distanceTo(players.local()) < 5
+        return Areas.EDGEVILLE_BANK.getCentralTile().distanceTo(ctx.players.local()) < 4
                 && wearingArmour()
-                && SelfService.haveGamesNecklaceinInventory(players.ctx)
-                && SelfService.haveFoodInInventory(players.ctx);
+                && SelfService.haveGamesNecklaceinInventory(ctx)
+                && SelfService.haveFoodInInventory(ctx);
     }
 
     @Override
     public void execute(){
 
-        players.ctx.game.tab(Game.Tab.INVENTORY);
-        ItemQuery<Item> gamesQuery = players.ctx.inventory.select().name(gamesPattern);
+
+        if (ctx.game.tab(Game.Tab.INVENTORY)){
+            ctx.game.tab(Game.Tab.INVENTORY);
+
+        }
+
+
+        ItemQuery<Item> gamesQuery = ctx.inventory.select().name(gamesPattern);
 
         Item necklace = gamesQuery.poll();
 
-        if (!players.ctx.chat.chatting() && players.local().animation() == -1){
-            System.out.println("Not chatting");
+        if (!ctx.chat.chatting() && ctx.players.local().animation() == -1){
             necklace.interact("Rub");
         }
 
 
-        if (players.ctx.chat.chatting() && players.local().animation() == -1){
-            System.out.println("Should select corp beast from chat.");
-
+        if (ctx.chat.chatting() && ctx.players.local().animation() == -1){
             Condition.wait(new Callable<Boolean>() {
                 @Override
                 public Boolean call() throws Exception {
-                    ChatOption c = players.ctx.chat.select().text("Corporeal Beast.").poll();
+                    ChatOption c = ctx.chat.select().text("Corporeal Beast.").poll();
                     return c.select(true);
                 }
             }, 250, 12);
@@ -55,16 +58,14 @@ public class TeleportToCorpBeast extends Task {
     }
 
     private boolean wearingArmour(){
-        players.ctx.game.tab(Game.Tab.EQUIPMENT);
+        ctx.game.tab(Game.Tab.EQUIPMENT);
 
-        if (players.ctx.equipment.itemAt(Equipment.Slot.TORSO).id() > 0
-                && players.ctx.equipment.itemAt(Equipment.Slot.OFF_HAND).name().equals("Anti-dragon shield")
-                && players.ctx.equipment.itemAt(Equipment.Slot.MAIN_HAND).id() > 0){
+        if (ctx.equipment.itemAt(Equipment.Slot.TORSO).id() > 0
+                && ctx.equipment.itemAt(Equipment.Slot.OFF_HAND).name().equals("Anti-dragon shield")
+                && ctx.equipment.itemAt(Equipment.Slot.MAIN_HAND).id() > 0){
 
             return true;
-
         }
-
         return false;
     }
 

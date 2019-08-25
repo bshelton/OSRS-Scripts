@@ -29,7 +29,6 @@ public class DragonKillerForm extends JFrame{
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Start button pressed");
 
                 if (supersCheckbox.isSelected()){
                     GreenDragonKiller.usesuperPotion = true;
@@ -49,19 +48,14 @@ public class DragonKillerForm extends JFrame{
                     setVisible(false);
                 }
 
-                System.out.println(GreenDragonKiller.foodSelection);
                 if (GreenDragonKiller.foodSelection.equals("None")){
                     JOptionPane.showMessageDialog(null, "You must select a food item.", "", JOptionPane.WARNING_MESSAGE);
                 } else{
                     GreenDragonKiller.haveRunStart = true;
+                    setVisible(false);
                 }
-
-
-
             }
         });
-
-
 
     }
 
@@ -73,7 +67,6 @@ public class DragonKillerForm extends JFrame{
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED) {
                     GreenDragonKiller.foodSelection = e.getItem().toString();
-                    System.out.println(GreenDragonKiller.foodSelection);
                 }
             }
         });

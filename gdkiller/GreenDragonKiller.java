@@ -40,7 +40,7 @@ public class GreenDragonKiller extends PollingScript<ClientContext> implements P
         taskList.add(new WalkToDrags(ctx));
         taskList.add(new AttackDrags(ctx));
         taskList.add(new Loot(ctx));
-        //taskList.add(new LeaveDrags(ctx));
+        taskList.add(new LeaveDrags(ctx));
 
         EventQueue.invokeLater(new Runnable() {
             @Override

@@ -1,5 +1,6 @@
 package LavaCrafter.lavaruneCrafter.Tasks;
 import LavaCrafter.lavaruneCrafter.utils.Items;
+import LavaCrafter.lavaruneCrafter.utils.SelfService;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Equipment.Slot;
@@ -19,7 +20,7 @@ public class TeleportToCastleWars extends Task {
     public boolean activate() {
         return players.ctx.inventory.select().id(Items.LAVA_RUNE_ID).count() > 0
                 && AT_FIRE_ALTAR.getCentralTile().distanceTo(players.local()) < 30
-                && !players.ctx.players.local().inMotion();
+                && SelfService.idling(players.ctx);
     }
 
     public void execute() {
