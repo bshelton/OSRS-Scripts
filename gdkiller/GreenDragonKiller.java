@@ -13,7 +13,7 @@ import java.awt.*;
 @Script.Manifest(
         name = "Green Dragon Killer",
         description = "Kills Green Dragons in wilderness.",
-        properties = "client = 4;"
+        properties = "client=4;topic=1352686;"
 )
 
 public class GreenDragonKiller extends PollingScript<ClientContext> implements PaintListener {
