@@ -4,7 +4,7 @@ import gdkiller.GreenDragonKiller;
 import org.powerbot.script.Client;
 import org.powerbot.script.Filter;
 import org.powerbot.script.rt4.*;
-import z.I;
+
 
 import java.util.regex.Pattern;
 

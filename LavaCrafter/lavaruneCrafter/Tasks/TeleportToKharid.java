@@ -18,9 +18,9 @@ public class TeleportToKharid extends Task {
     }
 
     public boolean activate(){
-        return !players.ctx.inventory.select().id(Items.PURE_ESS_ID).isEmpty()
-                && CASTLE_WARS_AREA.getCentralTile().distanceTo(players.local()) < 25
-                && !players.ctx.players.local().inMotion()
+        return !ctx.inventory.select().id(Items.PURE_ESS_ID).isEmpty()
+                && CASTLE_WARS_AREA.getCentralTile().distanceTo(ctx.players.local()) < 25
+                && !ctx.players.local().inMotion()
                 && !oneCharge();
     }
 
@@ -29,7 +29,7 @@ public class TeleportToKharid extends Task {
         Condition.wait(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                return (players.ctx.game.tab(Game.Tab.EQUIPMENT));
+                return (ctx.game.tab(Game.Tab.EQUIPMENT));
             }
         },100, 100);
 
@@ -38,14 +38,14 @@ public class TeleportToKharid extends Task {
         Condition.wait(new Callable<Boolean>() {
           @Override
             public Boolean call() throws Exception {
-               return (players.local().ctx.equipment.itemAt(Slot.RING).interact("Duel Arena"));
+               return (ctx.players.local().ctx.equipment.itemAt(Slot.RING).interact("Duel Arena"));
            }
        },100, 100);
         Condition.sleep(500);
     }
 
     private boolean oneCharge(){
-        players.ctx.game.tab(Game.Tab.EQUIPMENT);
-        return players.local().ctx.equipment.itemAt(Slot.RING).name().equals("Ring of dueling(1)");
+        ctx.game.tab(Game.Tab.EQUIPMENT);
+        return ctx.players.local().ctx.equipment.itemAt(Slot.RING).name().equals("Ring of dueling(1)");
     }
 }

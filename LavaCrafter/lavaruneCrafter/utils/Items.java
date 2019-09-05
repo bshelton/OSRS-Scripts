@@ -25,4 +25,6 @@ public class Items {
     public final static int FIRE_RUNE_ID = 554;
     public final static int FIRE_RUIN_OBJECT_ID = 30372;
 
+    public final static int BINDING_NECKLACE = 5521;
+
 }

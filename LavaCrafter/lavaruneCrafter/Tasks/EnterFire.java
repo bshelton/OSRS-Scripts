@@ -13,16 +13,16 @@ public class EnterFire extends Task {
     }
 
     public boolean activate() {
-        players.ctx.game.tab(Game.Tab.INVENTORY);
-        return !players.ctx.inventory.select().id(Items.PURE_ESS_ID).isEmpty() && OUTSIDE_RUINS.getCentralTile().distanceTo(players.local()) < 20;
+        ctx.game.tab(Game.Tab.INVENTORY);
+        return !ctx.inventory.select().id(Items.PURE_ESS_ID).isEmpty() && OUTSIDE_RUINS.getCentralTile().distanceTo(ctx.players.local()) < 20;
     }
 
     public void execute() {
 
-        GameObject g = players.ctx.objects.select().id(Items.FIRE_RUIN_OBJECT_ID).poll();
+        GameObject g = ctx.objects.select().id(Items.FIRE_RUIN_OBJECT_ID).poll();
 
         if (!g.inViewport()){
-            camera.turnTo(g);
+            ctx.camera.turnTo(g);
         }else{
             g.interact("Enter");
         }

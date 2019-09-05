@@ -18,21 +18,21 @@ public class TeleportToCastleWars extends Task {
     }
 
     public boolean activate() {
-        return players.ctx.inventory.select().id(Items.LAVA_RUNE_ID).count() > 0
-                && AT_FIRE_ALTAR.getCentralTile().distanceTo(players.local()) < 30
-                && SelfService.idling(players.ctx);
+        return ctx.inventory.select().id(Items.LAVA_RUNE_ID).count() > 0
+                && AT_FIRE_ALTAR.getCentralTile().distanceTo(ctx.players.local()) < 30
+                && SelfService.idling(ctx);
     }
 
     public void execute() {
 
-        players.ctx.game.tab(Game.Tab.EQUIPMENT);
+        ctx.game.tab(Game.Tab.EQUIPMENT);
 
         Condition.sleep(new Random().nextInt(5));
 
         Condition.wait(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                return (players.local().ctx.equipment.itemAt(Slot.RING).interact("Castle Wars"));
+                return (ctx.players.local().ctx.equipment.itemAt(Slot.RING).interact("Castle Wars"));
             }
         }, 100, 100);
         Condition.sleep(new Random().nextInt(500));
