@@ -2,11 +2,8 @@ package LavaCrafter.lavaruneCrafter.Tasks;
 
 import LavaCrafter.lavaruneCrafter.utils.Items;
 import LavaCrafter.lavaruneCrafter.utils.SelfService;
-import org.powerbot.script.rt4.Bank;
-import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.Slot;
-import org.powerbot.script.rt4.Game;
-import org.powerbot.script.rt4.Item;
 
 import javax.swing.*;
 
@@ -19,6 +16,8 @@ import static LavaCrafter.lavaruneCrafter.utils.Items.PURE_ESS_ID;
 
 
 public class Banking extends Task {
+
+    private boolean withdrewRing = false;
 
     public Banking(ClientContext ctx){
         super(ctx);
@@ -44,6 +43,12 @@ public class Banking extends Task {
         if (!wearingBindingNecklace()){
             ctx.bank.open();
             ctx.bank.withdraw(Items.BINDING_NECKLACE, Bank.Amount.ONE);
+
+            ctx.bank.close();
+            ItemQuery<Item> bindingNecklace = ctx.inventory.select().id(Items.BINDING_NECKLACE);
+            Item necklace = bindingNecklace.poll();
+            ctx.game.tab(Game.Tab.INVENTORY);
+            necklace.interact("Wear");
         }
 
         if (!wearingRing()) {
@@ -54,15 +59,27 @@ public class Banking extends Task {
                 ctx.bank.open();
                 ctx.bank.depositInventory();
 
-                String dueling = "";
-                for (int i = 2; i <= 8; i++) {
-                    dueling = "Ring of dueling(" + i + ")";
 
-                    for (Item item : ctx.bank.select().name(dueling)) {
-                        if (item.name().equals(dueling)){
-                            ctx.bank.withdraw(item.id(), Bank.Amount.ONE);
+                if (!withdrewRing){
+
+                    String dueling = "";
+
+                    for (int i = 2; i <= 8; i++) {
+
+                        if (withdrewRing)
+                            break;
+
+                        dueling = "Ring of dueling(" + i + ")";
+
+                        for (Item item : ctx.bank.select().name(dueling)) {
+                            if (item.name().equals(dueling)) {
+                                ctx.bank.withdraw(item.id(), Bank.Amount.ONE);
+                                withdrewRing = true;
+                            }
                         }
                     }
+
+                    withdrewRing = false;
                 }
 
                 ctx.bank.close();
@@ -93,9 +110,7 @@ public class Banking extends Task {
                 if (ctx.bank.withdraw(EARTH_TALISMAN_ID, Bank.Amount.ONE) && ctx.bank.withdraw(EARTH_RUNE_ID, Bank.Amount.ALL) ){
                     ctx.bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
                 }
-                else {
-                    System.out.println("No items to withdraw");
-                }
+
 
                 ctx.bank.close();
             }
@@ -107,9 +122,7 @@ public class Banking extends Task {
     }
 
     private boolean wearingBindingNecklace(){
-
         ctx.game.tab(Game.Tab.EQUIPMENT);
-        System.out.println( ctx.equipment.itemAt(Slot.NECK).id() == Items.BINDING_NECKLACE);
         return ctx.equipment.itemAt(Slot.NECK).id() == Items.BINDING_NECKLACE;
     }
 

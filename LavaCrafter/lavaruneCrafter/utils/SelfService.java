@@ -9,12 +9,15 @@ public class SelfService extends ClientContext {
     private String gamesRegex = ".*Games.*";
     private Pattern gamesPattern = Pattern.compile(gamesRegex);
 
-
+    private String duelingRegex = ".*dueling.*";
+    private Pattern duelingPattern = Pattern.compile(duelingRegex);
 
     public SelfService(ClientContext ctx){
         super(ctx);
     }
-    
+
+
+
     public static boolean wearingGlory(ClientContext ctx){
         ctx.game.tab(Game.Tab.EQUIPMENT);
 
