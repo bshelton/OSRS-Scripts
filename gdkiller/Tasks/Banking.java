@@ -48,7 +48,6 @@ public class Banking extends Task{
 
     @Override
     public void execute(){
-        wearingGlory = wearingGlory();
 
         if (!ctx.bank.inViewport()){
             ctx.camera.turnTo(ctx.bank.nearest());
@@ -60,7 +59,7 @@ public class Banking extends Task{
 
             withdrawGames();
 
-            if (!wearingGlory){
+            if (!wearingGlory()){
                 withdrawGlory();
             }
 

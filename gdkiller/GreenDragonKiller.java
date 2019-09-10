@@ -8,6 +8,7 @@ import org.powerbot.script.rt4.ClientContext;
 
 import java.util.ArrayList;
 import java.awt.*;
+import java.util.Random;
 
 
 @Script.Manifest(
@@ -42,14 +43,13 @@ public class GreenDragonKiller extends PollingScript<ClientContext> implements P
         taskList.add(new Loot(ctx));
         taskList.add(new LeaveDrags(ctx));
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DragonKillerForm gui = new DragonKillerForm(ctx);
-                gui.setVisible(true);
-            }
-        });
 
+        DragonKillerForm gui = new DragonKillerForm(ctx);
+        gui.setVisible(true);
+
+        while (gui.isVisible()){
+            Condition.sleep(new Random().nextInt(50));
+        }
     }
 
     @Override
