@@ -1,7 +1,7 @@
-package LavaCrafter.lavaruneCrafter.utils;
+package scripts.LavaCrafter.Utils;
 
-public class Items {
-    public void Item(){}
+ public class Items {
+    //public void Item(){}
 
     public final static int AMULET_OF_STR_ID = 1725;
     public final static int PURE_ESS_ID = 7936;
@@ -24,7 +24,8 @@ public class Items {
 
     public final static int FIRE_RUNE_ID = 554;
     public final static int FIRE_RUIN_OBJECT_ID = 30372;
+    public final static int FIRE_TIARA_ID = 5537;
 
-    public final static int BINDING_NECKLACE = 5521;
+    public final static int BINDING_NECKLACE_ID = 5521;
 
 }

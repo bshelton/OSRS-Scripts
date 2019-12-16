@@ -1,4 +1,4 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
+package scripts.LavaCrafter.Tasks;
 import org.powerbot.script.ClientAccessor;
 import org.powerbot.script.rt4.ClientContext;
 

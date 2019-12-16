@@ -1,9 +1,9 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
-import LavaCrafter.lavaruneCrafter.Tasks.Task;
+package scripts.LavaCrafter.Tasks;
+
 import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 
-import static ess.utils.Areas.DUEL_ARENA_AREA;
+import static scripts.ess.utils.Areas.DUEL_ARENA_AREA;
 
 public class WalkToAltar extends Task {
     private final Walk walker = new Walk(ctx);

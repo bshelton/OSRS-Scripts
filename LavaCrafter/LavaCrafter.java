@@ -1,7 +1,6 @@
-package LavaCrafter.lavaruneCrafter;
+package scripts.LavaCrafter;
 
-import LavaCrafter.lavaruneCrafter.Tasks.*;
-import LavaCrafter.lavaruneCrafter.Tasks.Task;
+import scripts.LavaCrafter.Tasks.*;
 
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;

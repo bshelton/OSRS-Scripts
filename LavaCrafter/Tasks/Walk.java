@@ -1,4 +1,4 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
+package scripts.LavaCrafter.Tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;

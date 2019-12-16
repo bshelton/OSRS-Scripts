@@ -1,15 +1,16 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
-import LavaCrafter.lavaruneCrafter.utils.Items;
-import LavaCrafter.lavaruneCrafter.utils.SelfService;
+package scripts.LavaCrafter.Tasks;
+
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Equipment.Slot;
 import org.powerbot.script.rt4.Game;
+import scripts.LavaCrafter.Utils.Items;
+import scripts.LavaCrafter.Utils.SelfService;
 
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import static ess.utils.Areas.AT_FIRE_ALTAR;
+import static scripts.ess.utils.Areas.AT_FIRE_ALTAR;
 
 public class TeleportToCastleWars extends Task {
 

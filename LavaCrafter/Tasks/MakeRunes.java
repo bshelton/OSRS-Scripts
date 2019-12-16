@@ -1,16 +1,17 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
-import LavaCrafter.lavaruneCrafter.utils.Items;
+package scripts.LavaCrafter.Tasks;
+
 import org.powerbot.script.Condition;
 import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Game;
 import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.Item;
+import scripts.LavaCrafter.Utils.Items;
 
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import static ess.utils.Areas.INSIDE_ALTAR;
+import static scripts.ess.utils.Areas.INSIDE_ALTAR;
 
 public class MakeRunes extends Task {
 

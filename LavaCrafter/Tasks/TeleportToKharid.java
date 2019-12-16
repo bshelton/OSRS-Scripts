@@ -1,15 +1,15 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
+package scripts.LavaCrafter.Tasks;
 
-import LavaCrafter.lavaruneCrafter.utils.*;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Equipment.Slot;
 import org.powerbot.script.rt4.Game;
+import scripts.LavaCrafter.Utils.Items;
 
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import static ess.utils.Areas.CASTLE_WARS_AREA;
+import static scripts.ess.utils.Areas.CASTLE_WARS_AREA;
 
 public class TeleportToKharid extends Task {
 

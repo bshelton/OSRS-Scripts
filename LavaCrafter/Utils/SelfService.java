@@ -1,4 +1,4 @@
-package LavaCrafter.lavaruneCrafter.utils;
+package scripts.LavaCrafter.Utils;
 
 import org.powerbot.script.rt4.*;
 

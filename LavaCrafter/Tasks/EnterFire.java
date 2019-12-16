@@ -1,10 +1,11 @@
-package LavaCrafter.lavaruneCrafter.Tasks;
-import LavaCrafter.lavaruneCrafter.utils.Items;
+package scripts.LavaCrafter.Tasks;
+
+import scripts.LavaCrafter.Utils.Items;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Game;
 import org.powerbot.script.rt4.GameObject;
 
-import static ess.utils.Areas.OUTSIDE_RUINS;
+import static scripts.ess.utils.Areas.OUTSIDE_RUINS;
 
 public class EnterFire extends Task {
 
