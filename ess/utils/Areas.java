@@ -1,4 +1,4 @@
-package ess.utils;
+package scripts.ess.utils;
 
 import org.powerbot.script.Area;
 import org.powerbot.script.Tile;

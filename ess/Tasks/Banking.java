@@ -1,14 +1,14 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 
 import java.util.regex.Pattern;
 
-import static ess.utils.Items.*;
-import static ess.utils.Areas.*;
+import static scripts.ess.utils.Items.*;
+import static scripts.ess.utils.Areas.*;
 
-public class Banking extends Task {
+public class Banking extends scripts.ess.Tasks.Task {
 
 
     public Banking(ClientContext ctx){

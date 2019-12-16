@@ -1,15 +1,14 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 
-import ess.utils.Items;
+import scripts.ess.utils.Items;
 
-import java.util.Random;
 import java.util.concurrent.Callable;
 
-import static ess.utils.Areas.*;
+import static scripts.ess.utils.Areas.*;
 
 public class TeleportToCastleWars extends Task {
 

@@ -1,6 +1,6 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
-import static ess.utils.Areas.DUEL_ARENA_AREA;
+import static scripts.ess.utils.Areas.DUEL_ARENA_AREA;
 
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.Tile;

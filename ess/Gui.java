@@ -1,4 +1,4 @@
-package ess;
+package scripts.ess;
 
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Constants;

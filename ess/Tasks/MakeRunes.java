@@ -1,15 +1,15 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.Tile;
 import java.util.Random;
-import ess.utils.Items;
+import scripts.ess.utils.Items;
 
 import java.util.concurrent.Callable;
 
-import static ess.utils.Areas.*;
+import static scripts.ess.utils.Areas.*;
 
 public class MakeRunes extends Task {
 

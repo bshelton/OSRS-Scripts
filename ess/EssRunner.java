@@ -1,6 +1,6 @@
-package ess;
+package scripts.ess;
 
-import ess.Tasks.*;
+import scripts.ess.Tasks.*;
 
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.Constants;

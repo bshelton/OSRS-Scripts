@@ -1,10 +1,10 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import ess.utils.Items;
+import scripts.ess.utils.Items;
 
-import static ess.utils.Areas.*;
+import static scripts.ess.utils.Areas.*;
 
 public class EnterFire extends Task {
 

@@ -1,4 +1,4 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
 import org.powerbot.script.rt4.ClientContext;
 

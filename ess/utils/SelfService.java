@@ -1,4 +1,4 @@
-package ess.utils;
+package scripts.ess.utils;
 
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Player;

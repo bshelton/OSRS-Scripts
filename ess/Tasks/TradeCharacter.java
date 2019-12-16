@@ -1,6 +1,6 @@
-package ess.Tasks;
+package scripts.ess.Tasks;
 
-import ess.EssRunner;
+import scripts.ess.EssRunner;
 import org.powerbot.script.Condition;
 
 import org.powerbot.script.rt4.Player;
@@ -9,7 +9,7 @@ import org.powerbot.script.rt4.ClientContext;
 
 import java.util.concurrent.Callable;
 
-import static ess.utils.Areas.*;
+import static scripts.ess.utils.Areas.*;
 
 public class TradeCharacter extends Task {
 
