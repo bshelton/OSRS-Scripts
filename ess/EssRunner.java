@@ -1,15 +1,11 @@
 package scripts.ess;
 
 import scripts.ess.Tasks.*;
-
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.Constants;
 import org.powerbot.script.rt4.ClientContext;
-
-
 import java.util.ArrayList;
 import java.awt.*;
-
 
 @Script.Manifest(
         name = "ESS RUNNER",
@@ -24,6 +20,7 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
     public static boolean haveRunStart = false;
     public static String crafterUsername;
     public static String mode;
+    public static String runeToCraft;
     private int startingXP = 0;
 
     public EssRunner(){
@@ -34,7 +31,6 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
     @Override
     public void start() {
         System.out.println("ESS RUNNER Started!");
-
 
         crafterTaskList.add(new Banking(ctx));
         crafterTaskList.add(new TeleportToKharid(ctx));
@@ -49,8 +45,6 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
         runnerTaskList.add(new EnterFire(ctx));
         runnerTaskList.add(new TradeCharacter(ctx));
         runnerTaskList.add(new TeleportToCastleWars(ctx));
-
-
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -67,9 +61,7 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
         if (!haveRunStart){
             //Set anything I want at the beginning.
             startingXP = ctx.skills.experience(Constants.SKILLS_RUNECRAFTING);
-
         } else {
-
             if (mode.equals("crafter")) {
 
                 for (Task task : crafterTaskList) {
@@ -77,7 +69,6 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
                         task.execute();
                 }
             }
-
             if (mode.equals("runner")){
                 for (Task task : runnerTaskList) {
                     if (task.activate())
@@ -104,12 +95,10 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
 
         g.setColor(new Color(0,0,0,180));
         g.fillRect(0, 0, 250, 100);
-
         g.setColor(new Color(255,255,255));
         g.drawString("EssRunner", 20, 20);
         g.drawString("Running: " + String.format("%02d:%02d:%02d", hours, minutes, seconds), 20, 40);
         //g.drawString("TradeCharacter: " + CRAFTER_USERNAME, 20, 60);
         g.drawString("Runecrafting xp gained: " + xpGained, 20, 60);
     }
-
 }

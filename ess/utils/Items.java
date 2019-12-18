@@ -22,4 +22,8 @@ public class Items {
     public final static int FIRE_RUNE_ID = 554;
     public final static int FIRE_RUIN_OBJECT_ID = 30372;
 
+    public final static int LAW_RUNE_ID = 563;
+    public final static int NATURE_RUNE_ID = 561;
+    public final static int WATER_RUNE_ID = 555;
+
 }

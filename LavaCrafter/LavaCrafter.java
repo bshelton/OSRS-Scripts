@@ -1,13 +1,12 @@
 package scripts.LavaCrafter;
 
 import scripts.LavaCrafter.Tasks.*;
-
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
-
 import java.util.ArrayList;
 
 
+@SuppressWarnings("SpellCheckingInspection")
 @Script.Manifest(
         name = "Lava Rune Crafter",
         description = "Script that makes Lava runes using ring of dueling to teleport.",
@@ -42,12 +41,10 @@ public class LavaCrafter extends PollingScript<ClientContext>{
             if (task.activate())
                 task.execute();
         }
-
     }
 
     @Override
     public void stop(){
         System.out.println("Script Stopped");
     }
-
 }

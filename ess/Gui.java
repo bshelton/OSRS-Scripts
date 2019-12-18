@@ -15,6 +15,7 @@ public class Gui extends JFrame {
     private JRadioButton runnerButton;
     private JRadioButton crafterRadioButton;
     private JLabel charLabel;
+    private JComboBox runeList;
     private ButtonGroup buttonGroup;
 
 
@@ -26,9 +27,14 @@ public class Gui extends JFrame {
         setBounds(100, 100, 325, 135);
         setContentPane(essPanel);
 
+        runeList.addItem("");
+        runeList.addItem("Fire Rune");
+        runeList.addItem("Air Rune");
+
+        //Set these invisible unless crafter mode is selected
         charTextField.setVisible(false);
         charLabel.setVisible(false);
-
+        runeList.setVisible(false);
 
         buttonGroup = new ButtonGroup();
         buttonGroup.add(runnerButton);
@@ -62,8 +68,15 @@ public class Gui extends JFrame {
                         setVisible(false);
                     }
 
-                    if (crafterRadioButton.isSelected()){
+                    if (crafterRadioButton.isSelected() && runeList.getSelectedItem() == "" ){
+                        JOptionPane.showMessageDialog(null, "Please select a rune to craft.", "", JOptionPane.ERROR_MESSAGE);
+                        setVisible(true);
+                    }
+
+                    if (crafterRadioButton.isSelected() && runeList.getSelectedItem() != "" ){
                         EssRunner.mode = "crafter";
+                        EssRunner.runeToCraft = runeList.getSelectedItem().toString();
+                        System.out.println(EssRunner.runeToCraft);
                         EssRunner.haveRunStart = true;
                         setVisible(false);
                     }
@@ -88,8 +101,11 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (crafterRadioButton.isSelected()){
+                    System.out.println("Crafter mode selected.");
                     charTextField.setVisible(false);
                     charLabel.setVisible(false);
+
+                    runeList.setVisible(true);
                 }
             }
         });
