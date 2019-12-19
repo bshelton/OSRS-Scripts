@@ -3,6 +3,7 @@ package scripts.ess.Tasks;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 import scripts.ess.EssRunner;
+import scripts.ess.utils.FireRune;
 import scripts.ess.utils.Items;
 import scripts.ess.utils.SelfService;
 
@@ -31,6 +32,16 @@ public class Banking extends scripts.ess.Tasks.Task {
         switch (EssRunner.runeToCraft) {
 
             case "Fire Rune":
+                if (!bank.inViewport())
+                    ctx.camera.turnTo(bank.nearest());
+
+                if (SelfService.wearingItem(ctx, FIRE_TIARA)){
+                    if (!bank.opened()){
+                        bank.open();
+                        bank.depositInventory();
+                        bank.withdraw(FIRE_TIARA, Bank.Amount.ONE);
+                    }
+                }
 
                 if (SelfService.oneCharge(ctx)) {
                     ctx.game.tab(Game.Tab.EQUIPMENT);
@@ -43,8 +54,6 @@ public class Banking extends scripts.ess.Tasks.Task {
                 if (!SelfService.wearingDuelingRing(ctx)) {
                     ItemQuery<Item> duelingRings = ctx.inventory.select().id(rings);
                     Item ring = duelingRings.poll();
-                    if (!bank.inViewport())
-                        ctx.camera.turnTo(bank.nearest());
 
                     if (!bank.opened()) {
                         bank.open();
@@ -63,8 +72,6 @@ public class Banking extends scripts.ess.Tasks.Task {
                         bank.close();
                     }
                 } else {
-                    if (!bank.inViewport())
-                        ctx.camera.turnTo(bank.nearest());
                     if (!bank.opened()) {
                         bank.open();
                         bank.depositInventory();
