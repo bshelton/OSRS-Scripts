@@ -3,7 +3,8 @@ package scripts.ess.Tasks;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 import scripts.ess.EssRunner;
-import scripts.ess.utils.DuelingRing;
+import scripts.ess.utils.Items;
+import scripts.ess.utils.SelfService;
 
 import java.util.regex.Pattern;
 
@@ -19,99 +20,61 @@ public class Banking extends scripts.ess.Tasks.Task {
 
     @Override
     public boolean activate() {
-        return CASTLE_WARS_AREA.getCentralTile().distanceTo(players.local()) < 15;
+        return CASTLE_WARS_AREA.getCentralTile().distanceTo(ctx.players.local()) < 15;
     }
 
     @Override
     public void execute() {
 
-        switch(EssRunner.runeToCraft) {
+        Bank bank = ctx.bank;
+
+        switch (EssRunner.runeToCraft) {
 
             case "Fire Rune":
 
-                DuelingRing duelingRing = new DuelingRing();
-
-                if (duelingRing.oneCharge(players.ctx)){
-                    players.ctx.game.tab(Game.Tab.EQUIPMENT);
-                    equipment.itemAt(Slot.RING).interact("Remove");
+                if (SelfService.oneCharge(ctx)) {
+                    ctx.game.tab(Game.Tab.EQUIPMENT);
+                    ctx.equipment.itemAt(Slot.RING).interact("Remove");
                     bank.open();
                     bank.depositInventory();
                     bank.close();
                 }
 
-                if (! duelingRing.wearingRing(players.ctx)) {
+                if (!SelfService.wearingDuelingRing(ctx)) {
+                    ItemQuery<Item> duelingRings = ctx.inventory.select().id(rings);
+                    Item ring = duelingRings.poll();
                     if (!bank.inViewport())
-                        camera.turnTo(bank.nearest());
+                        ctx.camera.turnTo(bank.nearest());
 
                     if (!bank.opened()) {
                         bank.open();
                         bank.depositInventory();
-
-                        // Find Ring in Bank and Withdraw
-                        for (int ring: duelingRing.rings){
-                            for (Item item : bank.select().id(ring)){
-                                if (item.id() == ring) {
-                                    bank.withdraw(item.id(), Bank.Amount.ONE);
-                                }
-                            }
-                        }
+                        bank.withdraw(ring.id(), Bank.Amount.ONE);
                         bank.close();
 
-                        players.ctx.game.tab(Game.Tab.INVENTORY);
+                        ctx.game.tab(Game.Tab.INVENTORY);
                         //Wear the ring
-                        for (Item item: players.ctx.inventory.items()) {
-                            if (item.name().contains("dueling")){
-                                item.interact("Wear");
-                            }
-                        }
+                        ring.interact("Wear");
 
-                        players.ctx.game.tab(Game.Tab.EQUIPMENT);
+                        ctx.game.tab(Game.Tab.EQUIPMENT);
 
                         bank.open();
                         bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
+                        bank.close();
                     }
-
                 } else {
                     if (!bank.inViewport())
-                        camera.turnTo(bank.nearest());
+                        ctx.camera.turnTo(bank.nearest());
                     if (!bank.opened()) {
                         bank.open();
                         bank.depositInventory();
                         bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
                         bank.close();
                     }
-
                     bank.close();
                 }
-                bank.close();
-
             default:
                 System.out.println("default");
         }
     }
-
-//    private boolean wearingRing(){
-//
-//        players.ctx.game.tab(Game.Tab.EQUIPMENT);
-//
-//        String dueling = "";
-//
-//        int i = 0;
-//        while (!players.local().ctx.equipment.itemAt(Slot.RING).name().equals(dueling)){
-//            i++;
-//            dueling = "Ring of dueling(" + i + ")";
-//
-//            if (players.local().ctx.equipment.itemAt(Slot.RING).name().equals(dueling)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    private boolean oneCharge(){
-//        players.ctx.game.tab(Game.Tab.EQUIPMENT);
-//        return players.local().ctx.equipment.itemAt(Slot.RING).name().equals("Ring of dueling(1)");
-//    }
-
-
 }

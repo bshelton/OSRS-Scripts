@@ -5,6 +5,7 @@ import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 
 import scripts.ess.utils.Items;
+import scripts.ess.utils.SelfService;
 
 import java.util.concurrent.Callable;
 
@@ -17,9 +18,9 @@ public class TeleportToCastleWars extends Task {
     }
 
     public boolean activate() {
-        return players.ctx.inventory.select().id(Items.FIRE_RUNE_ID).count() > 0
-                && AT_FIRE_ALTAR.getCentralTile().distanceTo(players.local()) < 30
-                && !players.ctx.players.local().inMotion();
+        return ctx.inventory.select().id(Items.FIRE_RUNE_ID).count() > 0
+                && AT_FIRE_ALTAR.getCentralTile().distanceTo(ctx.players.local()) < 30
+                && !ctx.players.local().inMotion();
     }
 
     public void execute() {
@@ -27,7 +28,7 @@ public class TeleportToCastleWars extends Task {
         Condition.wait(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                return (players.ctx.game.tab(Game.Tab.EQUIPMENT));
+                return (ctx.game.tab(Game.Tab.EQUIPMENT));
             }
         },100, 100);
 
@@ -38,8 +39,8 @@ public class TeleportToCastleWars extends Task {
 //            }
 //            }, 100, 100);
 
-        if (players.local().animation() == -1) {
-            players.local().ctx.equipment.itemAt(Slot.RING).interact("Castle Wars");
+        if (SelfService.idling(ctx)) {
+            ctx.players.local().ctx.equipment.itemAt(Slot.RING).interact("Castle Wars");
         }
 
 //        Condition.wait(new Callable<Boolean>() {

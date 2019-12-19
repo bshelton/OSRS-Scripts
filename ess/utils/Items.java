@@ -14,6 +14,13 @@ public class Items {
     public final static int RING_OF_DUELING_ID2 = 2564;
     public final static int RING_OF_DUELING_ID1 = 2566;
 
+    public final static int[] rings = new int[] {
+        RING_OF_DUELING_ID1, RING_OF_DUELING_ID2,
+                RING_OF_DUELING_ID3, RING_OF_DUELING_ID4,
+                RING_OF_DUELING_ID5, RING_OF_DUELING_ID6,
+                RING_OF_DUELING_ID7, RING_OF_DUELING_ID8
+    };
+
     public final static int EQUIP_WIDGET_COMPONENT = 52;
     public final static int INVENTORY_WIDGET_COMPONENT = 54;
 

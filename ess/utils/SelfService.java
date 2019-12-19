@@ -1,7 +1,7 @@
 package scripts.ess.utils;
 
-import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.Player;
+import org.powerbot.script.rt4.*;
+
 
 //Need to make use of later.
 public class SelfService {
@@ -13,5 +13,30 @@ public class SelfService {
         return self.animation() == -1
                 && !self.healthBarVisible()
                 && !self.inMotion();
+    }
+
+    public static boolean oneCharge(ClientContext ctx){
+        ctx.game.tab(Game.Tab.EQUIPMENT);
+        return ctx.equipment.itemAt(Equipment.Slot.RING).id() == Items.RING_OF_DUELING_ID1;
+    }
+
+    public static boolean wearingDuelingRing(ClientContext ctx){
+        ctx.game.tab(Game.Tab.EQUIPMENT);
+        for (int ring : Items.rings) {
+            if (wearingItem(ctx, ring)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean wearingItem(ClientContext ctx, int itemid){
+        ctx.game.tab(Game.Tab.EQUIPMENT);
+        for (Equipment.Slot s : Equipment.Slot.values()){
+            if (ctx.equipment.itemAt(s).id() == itemid){
+                return true;
+            }
+        }
+        return false;
     }
 }

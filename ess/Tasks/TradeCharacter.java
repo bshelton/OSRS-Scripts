@@ -24,7 +24,7 @@ public class TradeCharacter extends Task {
     @Override
     public boolean activate() {
         System.out.println("trading activate");
-        return AT_FIRE_ALTAR.getCentralTile().distanceTo(players.local()) < 70;
+        return AT_FIRE_ALTAR.getCentralTile().distanceTo(ctx.players.local()) < 70;
     }
 
     @Override
