@@ -11,13 +11,13 @@ import java.util.concurrent.Callable;
 
 import static scripts.ess.utils.Areas.*;
 
-public class MakeRunes extends Task {
+public class MakeFireRunes extends Task {
 
     private final int ALTAR_ID = 34764;
     private final Walk walker = new Walk(ctx);
     public static final Tile[] path = {new Tile(2575, 4848, 0), new Tile(2578, 4845, 0), new Tile(2582, 4844, 0)};
 
-    public MakeRunes(ClientContext ctx) {
+    public MakeFireRunes(ClientContext ctx) {
         super(ctx);
     }
 

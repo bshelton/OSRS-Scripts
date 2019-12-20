@@ -36,7 +36,7 @@ public class EssRunner extends PollingScript<ClientContext> implements PaintList
         crafterTaskList.add(new TeleportToKharid(ctx));
         crafterTaskList.add(new WalkToAltar(ctx));
         crafterTaskList.add(new EnterFire(ctx));
-        crafterTaskList.add(new MakeRunes(ctx));
+        crafterTaskList.add(new MakeFireRunes(ctx));
         crafterTaskList.add(new TeleportToCastleWars(ctx));
 
         runnerTaskList.add(new Banking(ctx));

@@ -1,5 +1,6 @@
 package scripts.ess.Tasks;
 
+import org.powerbot.script.Client;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 import scripts.ess.EssRunner;
@@ -26,62 +27,84 @@ public class Banking extends scripts.ess.Tasks.Task {
 
     @Override
     public void execute() {
-
         Bank bank = ctx.bank;
 
         switch (EssRunner.runeToCraft) {
 
             case "Fire Rune":
-                if (!bank.inViewport())
-                    ctx.camera.turnTo(bank.nearest());
-
-                if (SelfService.wearingItem(ctx, FIRE_TIARA)){
-                    if (!bank.opened()){
-                        bank.open();
-                        bank.depositInventory();
-                        bank.withdraw(FIRE_TIARA, Bank.Amount.ONE);
-                    }
-                }
-
-                if (SelfService.oneCharge(ctx)) {
-                    ctx.game.tab(Game.Tab.EQUIPMENT);
-                    ctx.equipment.itemAt(Slot.RING).interact("Remove");
-                    bank.open();
-                    bank.depositInventory();
-                    bank.close();
-                }
-
-                if (!SelfService.wearingDuelingRing(ctx)) {
-                    ItemQuery<Item> duelingRings = ctx.inventory.select().id(rings);
-                    Item ring = duelingRings.poll();
-
-                    if (!bank.opened()) {
-                        bank.open();
-                        bank.depositInventory();
-                        bank.withdraw(ring.id(), Bank.Amount.ONE);
-                        bank.close();
-
-                        ctx.game.tab(Game.Tab.INVENTORY);
-                        //Wear the ring
-                        ring.interact("Wear");
-
-                        ctx.game.tab(Game.Tab.EQUIPMENT);
-
-                        bank.open();
-                        bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
-                        bank.close();
-                    }
-                } else {
-                    if (!bank.opened()) {
-                        bank.open();
-                        bank.depositInventory();
-                        bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
-                        bank.close();
-                    }
-                    bank.close();
-                }
+                runFire(ctx, bank);
+            case "Water Rune":
+                runWater(ctx, bank);
             default:
                 System.out.println("default");
+        }
+    }
+
+
+    private void runWater(ClientContext ctx, Bank bank){
+
+        if (!bank.inViewport())
+            ctx.camera.turnTo(bank.nearest());
+
+        if (SelfService.wearingItem(ctx, WATER_TIARA)){
+            if (!bank.opened()){
+                bank.open();
+                bank.depositInventory();
+                bank.withdraw(WATER_TIARA, Bank.Amount.ONE);
+            }
+        }
+
+    }
+
+
+    private void runFire(ClientContext ctx, Bank bank){
+        if (!bank.inViewport())
+            ctx.camera.turnTo(bank.nearest());
+
+        if (SelfService.wearingItem(ctx, FIRE_TIARA)){
+            if (!bank.opened()){
+                bank.open();
+                bank.depositInventory();
+                bank.withdraw(FIRE_TIARA, Bank.Amount.ONE);
+            }
+        }
+
+        if (SelfService.oneCharge(ctx)) {
+            ctx.game.tab(Game.Tab.EQUIPMENT);
+            ctx.equipment.itemAt(Slot.RING).interact("Remove");
+            bank.open();
+            bank.depositInventory();
+            bank.close();
+        }
+
+        if (!SelfService.wearingDuelingRing(ctx)) {
+            ItemQuery<Item> duelingRings = ctx.inventory.select().id(rings);
+            Item ring = duelingRings.poll();
+
+            if (!bank.opened()) {
+                bank.open();
+                bank.depositInventory();
+                bank.withdraw(ring.id(), Bank.Amount.ONE);
+                bank.close();
+
+                ctx.game.tab(Game.Tab.INVENTORY);
+                //Wear the ring
+                ring.interact("Wear");
+
+                ctx.game.tab(Game.Tab.EQUIPMENT);
+
+                bank.open();
+                bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
+                bank.close();
+            }
+        } else {
+            if (!bank.opened()) {
+                bank.open();
+                bank.depositInventory();
+                bank.withdraw(PURE_ESS_ID, Bank.Amount.ALL);
+                bank.close();
+            }
+            bank.close();
         }
     }
 }

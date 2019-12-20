@@ -29,6 +29,7 @@ public class Gui extends JFrame {
 
         runeList.addItem("");
         runeList.addItem("Fire Rune");
+        runeList.addItem("Water Rune");
         runeList.addItem("Air Rune");
 
         //Set these invisible unless crafter mode is selected
