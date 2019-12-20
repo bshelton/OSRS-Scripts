@@ -1,8 +1,8 @@
-package gdkiller.Tasks;
+package scripts.gdkiller.Tasks;
 
-import gdkiller.utils.Areas;
+import scripts.gdkiller.utils.Areas;
 
-import gdkiller.utils.SelfService;
+import scripts.gdkiller.utils.SelfService;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import java.util.concurrent.Callable;

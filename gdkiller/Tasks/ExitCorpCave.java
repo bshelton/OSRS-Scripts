@@ -1,8 +1,8 @@
-package gdkiller.Tasks;
+package scripts.gdkiller.Tasks;
 
 
-import gdkiller.utils.Areas;
-import gdkiller.utils.Items;
+import scripts.gdkiller.utils.Areas;
+import scripts.gdkiller.utils.Items;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Game;
 import org.powerbot.script.rt4.GameObject;

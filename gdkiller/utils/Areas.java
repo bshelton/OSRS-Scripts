@@ -1,4 +1,4 @@
-package gdkiller.utils;
+package scripts.gdkiller.utils;
 
 import org.powerbot.script.Area;
 import org.powerbot.script.Tile;

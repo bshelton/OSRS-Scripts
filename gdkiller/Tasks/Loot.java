@@ -1,7 +1,7 @@
-package gdkiller.Tasks;
+package scripts.gdkiller.Tasks;
 
-import gdkiller.utils.Items;
-import gdkiller.utils.SelfService;
+import scripts.gdkiller.utils.Items;
+import scripts.gdkiller.utils.SelfService;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.*;
 

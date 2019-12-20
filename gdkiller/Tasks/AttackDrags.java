@@ -1,11 +1,11 @@
-package gdkiller.Tasks;
+package scripts.gdkiller.Tasks;
 
-import gdkiller.GreenDragonKiller;
-import gdkiller.utils.Areas;
-import gdkiller.GreenDragonKiller.*;
+import scripts.gdkiller.GreenDragonKiller;
+import scripts.gdkiller.utils.Areas;
+import scripts.gdkiller.GreenDragonKiller.*;
 
-import gdkiller.utils.Items;
-import gdkiller.utils.SelfService;
+import scripts.gdkiller.utils.Items;
+import scripts.gdkiller.utils.SelfService;
 import org.powerbot.script.Filter;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.Condition;

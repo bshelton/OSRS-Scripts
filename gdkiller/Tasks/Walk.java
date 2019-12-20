@@ -1,4 +1,4 @@
-package gdkiller.Tasks;
+package scripts.gdkiller.Tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;

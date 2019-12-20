@@ -4,11 +4,9 @@ import org.powerbot.script.Client;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.Equipment.*;
 import scripts.ess.EssRunner;
-import scripts.ess.utils.FireRune;
 import scripts.ess.utils.Items;
 import scripts.ess.utils.SelfService;
 
-import java.util.regex.Pattern;
 
 import static scripts.ess.utils.Items.*;
 import static scripts.ess.utils.Areas.*;
@@ -40,7 +38,6 @@ public class Banking extends scripts.ess.Tasks.Task {
         }
     }
 
-
     private void runWater(ClientContext ctx, Bank bank){
 
         if (!bank.inViewport())
@@ -55,7 +52,6 @@ public class Banking extends scripts.ess.Tasks.Task {
         }
 
     }
-
 
     private void runFire(ClientContext ctx, Bank bank){
         if (!bank.inViewport())

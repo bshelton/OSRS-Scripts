@@ -1,6 +1,6 @@
-package gdkiller.Tasks;
+package scripts.gdkiller.Tasks;
 
-import gdkiller.GreenDragonKiller;
+import scripts.gdkiller.GreenDragonKiller;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.*;
 
@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import gdkiller.utils.*;
+import scripts.gdkiller.utils.*;
 
 public class Banking extends Task{
 
@@ -18,7 +18,6 @@ public class Banking extends Task{
     private String supersRegex = ".*Super.*";
     private String prayerRegex = ".*Prayer.*";
     private Pattern prayerPatten = Pattern.compile(prayerRegex);
-
     private Pattern supersPatten = Pattern.compile(supersRegex);
 
     private String superAttackRegex = ".*Super attack.*";
@@ -59,7 +58,7 @@ public class Banking extends Task{
 
             withdrawGames();
 
-            if (!wearingGlory()){
+            if (!SelfService.wearingGlory(ctx)){
                 withdrawGlory();
             }
 
@@ -90,26 +89,13 @@ public class Banking extends Task{
                 //bank.withdraw(SelfService.getFoodIDFromBank(players.ctx), Bank.Amount.FIVE);
             }
             ctx.bank.close();
-
         }
             wearGlory();
     }
 
-    private boolean wearingGlory(){
-        ItemQuery<Item> gloryQuery = ctx.equipment.select().name(gloryPattern);
-
-        if (gloryQuery.isEmpty()){
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     private boolean prayersInInventory(){
         ctx.game.tab(Game.Tab.INVENTORY);
-
         ItemQuery<Item> prayersQuery = ctx.inventory.select().name(prayerPatten);
-
         return prayersQuery.isEmpty();
     }
 
@@ -124,17 +110,12 @@ public class Banking extends Task{
 
     }
 
-
     private boolean haveSupersInBank(){
-
         ItemQuery<Item> supersQuery = ctx.bank.select().name(supersPatten);
-
         if (supersQuery.isEmpty()){
             return false;
         } else return true;
-
     }
-
 
     private boolean withdrawGlory(){
         ItemQuery<Item> gloryQuery = ctx.bank.select().name(gloryPattern);
@@ -167,7 +148,6 @@ public class Banking extends Task{
 
     private boolean withdrawSuperDefence(){
         ItemQuery<Item> superDefenceQuery = ctx.bank.select().name(superDefencePattern);
-
         if (!superDefenceQuery.isEmpty()){
             return ctx.bank.withdraw(superDefenceQuery.poll(), 1);
         } else return false;
@@ -175,9 +155,7 @@ public class Banking extends Task{
 
 
     private boolean withdrawSuperStrength(){
-
         ItemQuery<Item> superStrengthQuery = ctx.bank.select().name(superStrengthPatten);
-
         if(!superStrengthQuery.isEmpty()){
             return ctx.bank.withdraw(superStrengthQuery.poll(), 1);
         } else return false;
@@ -185,7 +163,6 @@ public class Banking extends Task{
 
     private boolean supersInInventory(){
         ctx.game.tab(Game.Tab.INVENTORY);
-
         ItemQuery<Item> supersQuery = ctx.inventory.select().name(supersPatten);
 
         if (supersQuery.isEmpty()){

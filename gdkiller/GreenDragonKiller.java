@@ -1,15 +1,13 @@
-package gdkiller;
+package scripts.gdkiller;
 
-import gdkiller.Tasks.*;
+import scripts.gdkiller.Tasks.*;
 
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
 
-
 import java.util.ArrayList;
 import java.awt.*;
 import java.util.Random;
-
 
 @Script.Manifest(
         name = "Green Dragon Killer",
@@ -57,14 +55,11 @@ public class GreenDragonKiller extends PollingScript<ClientContext> implements P
 
         if (!haveRunStart){
             //Set anything I want at the beginning
-
        } else {
-
             for (Task task : taskList) {
                 if (task.activate())
                     task.execute();
             }
-
         }
     }
 

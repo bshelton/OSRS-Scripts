@@ -1,4 +1,4 @@
-package gdkiller;
+package scripts.gdkiller;
 
 import org.powerbot.script.rt4.ClientContext;
 
