@@ -12,7 +12,7 @@ import java.util.Random;
 @Script.Manifest(
         name = "Green Dragon Killer",
         description = "Kills Green Dragons in wilderness.",
-        properties = "client=4;topic=1352686;"
+        properties = "client=4;topic=1353675;"
 )
 
 public class GreenDragonKiller extends PollingScript<ClientContext> implements PaintListener {
